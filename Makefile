@@ -1,7 +1,7 @@
 include ../../Makefile.inc
 
 MODDIR = .
-MODNAME = modname
+MODNAME = vendorid-productid-modname
 
 COMMON_CFLAGS = -ffreestanding             \
 	 -fno-stack-protector          \
