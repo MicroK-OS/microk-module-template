@@ -68,7 +68,7 @@ $(MODDIR)/%.o: $(MODDIR)/%.cpp
 
 module: $(OBJS)
 	@ echo !==== LINKING
-	$(LD) $(LDFLAGS) -o ../$(MODNAME).elf $(OBJS) -L. -lmkmi
+	$(LD) $(LDFLAGS) -o ../$(MODNAME).elf $(OBJS) -L../../mkmi -lmkmi
 
 clean:
 	@rm $(OBJS)
