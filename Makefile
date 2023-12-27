@@ -1,7 +1,7 @@
 include ../../Makefile.inc
 
 MODDIR = .
-MODNAME = vendorid-productid-modname
+MODNAME = modname
 
 COMMON_CFLAGS = -ffreestanding             \
 	 -fno-stack-protector          \
@@ -11,9 +11,10 @@ COMMON_CFLAGS = -ffreestanding             \
 	 -I ../../microk-kernel/src/include    \
 	 -Wall                      \
 	 -Wextra                    \
+	 -Werror                    \
 	 -Wno-write-strings         \
 	 -Weffc++                   \
-	 -O2                        \
+	 -Og                        \
 	 -fno-rtti                  \
 	 -fno-exceptions            \
 	 -fno-lto                   \
@@ -37,8 +38,7 @@ ifeq ($(ARCH), x86_64)
 	 -m64                       \
 	 -mabi=sysv                 \
 	 -mcmodel=small  \
-	 -march=x86-64 \
-	 -mcmodel=kernel
+	 -march=x86-64
 
 	LDFLAGS += -m elf_x86_64
 
@@ -68,7 +68,7 @@ $(MODDIR)/%.o: $(MODDIR)/%.cpp
 
 module: $(OBJS)
 	@ echo !==== LINKING
-	$(LD) $(LDFLAGS) -o ../$(MODNAME).elf $(OBJS) -L../../mkmi -lmkmi
+	$(LD) $(LDFLAGS) -o ../$(MODNAME).kmd $(OBJS) -L../../mkmi -lmkmi
 
 clean:
 	@rm $(OBJS)
